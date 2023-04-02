@@ -1,0 +1,133 @@
+/* nav */
+.main .shop.nav_container{
+   box-shadow: 0 0px 3px 0px rgb(0 0 0 / 20%);
+
+}
+.main .nav_container.sticky{
+    background: #222;
+    border-bottom: 0;
+    height: 70px;
+
+}
+.main .nav_container.sticky .nav_wrapper.shop .logo h3,
+.main .nav_container.sticky .nav_wrapper.shop .list li a,
+.main .nav_container.sticky .nav_wrapper.shop .cart i{
+    color: #fff !important;
+}
+
+.cart i{
+    color: #000 !important;
+}.cart i:hover{
+    color: #545DA5 !important;
+}   
+/* title */
+#collection .nav_btn:nth-child(1){
+    margin: 0;
+}
+#collection .nav_btn{
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: 30px;
+    position: relative;
+}
+#collection .nav_btn.active::before{
+    visibility: visible;
+    opacity: 1;
+}
+
+
+#collection .nav_btn::before{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height:1px;
+    background: #000;
+    left: 0;
+    bottom: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease-in;
+}
+#collection .nav_btn:hover::before{
+    visibility: visible;
+    opacity: 1;
+}
+
+/* collection */
+.collection-img{
+    /* background: r; */
+}
+.collection-img img{
+}
+
+.so_card_img{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.so_card_img img{
+    width: 100%;
+
+}
+.so_card_img .so_view{
+    position: absolute;
+    /* bottom: 20px; */
+    bottom: -50px;
+    left: 50%;
+    transform: translate(-50%,0);
+    font-family: 'Poppins', sans-serif;
+    background: #fff;
+    border-radius: 100px;
+    width: 150px;
+    height: 45px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    color: #666;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+ .so_card_img .so_view:hover{
+    background: #212529;
+    color: #fff;
+}
+.so_card_img img{
+    height: 100%;
+    width: 100%;
+    transition: 0.6s ease-in-out;
+    cursor: pointer;
+}
+.so_card_img:hover img{
+    transform: scale(1.1,1.1);
+}
+.so_card_img:hover .so_view{
+    bottom: 20px;
+}
+.so_card_content{
+    display: flex;
+    /* background: pink; */
+    padding: 12px 0;
+    text-align: left;
+}
+.so_card_content .so_l_content{
+    flex: 1;
+    font-family: 'Poppins', sans-serif;
+}
+
+.so_card_content .so_l_content p{
+    color: #999;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    margin: 0 !important;
+    margin-bottom: 4px !important;
+}
+.so_card_content .so_l_content span{
+    color: #666;
+    font-size: 15px;
+}
+ .so_card_content i{
+    color: rgb(197, 197, 197);
+    font-size: 20px;
+}

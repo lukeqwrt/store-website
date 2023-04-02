@@ -59,6 +59,9 @@ html{
     /* margin-right: 64px; */
     margin: 0px 64px  0px 45px;
 }
+.shop.nav_container .nav_wrapper .logo h3{
+    color: #000 !important;
+}
 .main .nav_container .nav_wrapper .logo h3{
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
@@ -82,7 +85,9 @@ html{
     margin-right: 28px;
 
 }
-
+.main .shop.nav_container .nav_wrapper .list li a{
+    color: #000 !important;    
+}
 .main .nav_container .nav_wrapper .list li a{
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
@@ -176,13 +181,13 @@ html{
     display: none;
 }
 .main .landing_page .landing_opacity .landing_content .hero_content_wrapper .hero_content h6{
-    font-size: 25px;
+    font-size: 28px;
     font-weight: 500;
     color: #fff;
     margin-bottom: 15px;
 }
 .main .landing_page .landing_opacity .landing_content .hero_content_wrapper .hero_content h3{
-    font-size: 50px;
+    font-size: 55px;
     color: #fff;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 25px;
@@ -415,19 +420,20 @@ html{
 
 .store_overview .so_wrapper .so-tab-content .so_content{
     display: none;
-    animation: fadein 0.5s ease-out;
+    /* animation: fadeout 0.5s ease-out; */
 }
 .store_overview .so_wrapper .so-tab-content .so_content.so_active{
     display: block;
-    animation: fadein 0.5s ease-out;
+    animation: fadein 0.5s ease-out ;
+   
 }
-
-
 @keyframes fadein {
     0% {
+        visibility: hidden;
         opacity: 0;
     }
     100% {
+        visibility: visible;
         opacity: 1;
     }
 }
@@ -448,6 +454,9 @@ display: grid;
     overflow: hidden;
     position: relative;
 }   
+.store_overview .so_wrapper .so-tab-content .so_content.so_active .so_card .so_card_img img{
+     /* width: 100%; */
+}
 .store_overview .so_wrapper .so-tab-content .so_content.so_active .so_card .so_card_img .so_view{
     position: absolute;
     /* bottom: 20px; */
@@ -735,7 +744,7 @@ display: grid;
     .store_overview .so_wrapper .so-tab-content .so_content.so_active .so_card img{
         height: auto;
         min-height: 220px;
-        max-width: 270px;
+        /* max-width: 270px; */
         width: 100%;
     }
     .swiper-button-next{
