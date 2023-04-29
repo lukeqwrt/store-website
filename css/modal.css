@@ -34,6 +34,18 @@
     width: 90%;
     background: #fff;
     display: grid;
+    position: relative;
+}
+.main .item_modal .modal_container .remove{
+    position: absolute;
+    top: -50px;
+    right: 0;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 .main .item_modal .modal_container .modal_img_l{
     height: 100%;
@@ -43,7 +55,7 @@
 }
 .main .item_modal .modal_container .modal_img_l img{
     height: 100%;
-    max-width: 200px;
+    max-width: 180px;
     width: 100%;
 }
 
@@ -52,14 +64,21 @@
 }
 .main .item_modal .modal_container .modal_content_r h3{
     font-weight: 300;
-    font-size: 24px;
-    margin-bottom: 15px;
+    /* font-size: 24px; */
+    font-size: 19px;
+    /* margin-bottom: 15px; */
+    margin-bottom: 8px;
 }
 .main .item_modal .modal_container .modal_content_r h5{
-    font-size: 18px;
+    /* font-size: 18px; */
+    font-size: 14px;
     color: #303030;
     margin-bottom: 15px;
 }
+.main .item_modal .modal_container .modal_content_r .details_wrapper .choose span{
+    font-size: 15px;
+}
+
 .main .item_modal .modal_container .modal_content_r .details_wrapper .choose{
     display: grid;
     grid-gap: 8px;
@@ -78,17 +97,19 @@
     font-family: 'Poppins', sans-serif;
     padding-left:5px;
 }
+
 .main .item_modal .modal_container .modal_content_r .details_wrapper .choose select > option{
     padding: 50px 0 !important;
     cursor: pointer; 
 }
+
 .main .item_modal .modal_container .modal_content_r .count{
     margin-top: 15px;
     display: flex;
 }
 .main .item_modal .modal_container .modal_content_r .count button{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     background: #fff !important;
     color: #303030;
@@ -99,13 +120,17 @@
     font-size: 22px;
     transition: 0.3s ease;
 }
+
 .main .item_modal .modal_container .modal_content_r .count button:hover{
     background: #717fe0 !important;
     color: #fff;
 }
+
 .main .item_modal .modal_container .modal_content_r .count input{
-    width: 40px;
-    height: 40px;
+    /* width: 40px; */
+    width: 30px;
+    /* height: 40px; */
+    height: 30px;
     background: #fff !important;
     color: #303030;
     border:1px solid #dbdbdb;
@@ -151,7 +176,7 @@
     display: none;
     transition: 0.5s ease;
     animation: fadeIn 0.5s ease;
-    
+    z-index: 9999;
 }
 .item_modal .modal_notif.notif_remove_transition{
     visibility: hidden;
@@ -246,6 +271,30 @@
         margin-top: 30px;
         display: flex;
     }
+
+    /* fonts big size */
+    .main .item_modal .modal_container .modal_content_r h3{
+        font-weight: 300;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .main .item_modal .modal_container .modal_content_r h5{
+        font-size: 18px;
+        color: #303030;
+        margin-bottom: 15px;
+    }
+    .main .item_modal .modal_container .modal_content_r .details_wrapper .choose span{
+        font-size:unset;
+    }
+    .main .item_modal .modal_container .modal_content_r .count button{
+        width: 40px;
+        height: 40px;
+    }
+    .main .item_modal .modal_container .modal_content_r .count input{
+        width: 40px;
+        height: 40px;
+    }
+    
 }
 
 @media screen and (min-width: 992px){

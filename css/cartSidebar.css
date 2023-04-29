@@ -13,6 +13,7 @@
     visibility: hidden;
     opacity: 0;
     transition: 0.5s ease;
+    
 }
 .main .sidebar_cart.cart_active{
     visibility: visible;
@@ -49,6 +50,10 @@
     font-weight: 300;
     cursor: pointer;
     transition: 0.5s ease;
+
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 .main .sidebar_cart .cart_wrapper .header span:hover{
     color: #717fe0;
@@ -123,6 +128,10 @@
 
     padding-left: 65px;
     padding-right: 20px;
+}
+.main .sidebar_cart .cart_wrapper .cart_bottom .total_wrapper{
+    display: flex;
+    gap: 10px;
 }
 .main .sidebar_cart .cart_wrapper .cart_bottom h3{
     font-weight: 400;

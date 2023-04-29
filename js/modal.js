@@ -1,7 +1,129 @@
 // get quickview btn
 const quickView = document.querySelectorAll('.so_view')
 const main = document.querySelector('.main')
-let bag ;
+const product_cart_wrapper = document.querySelector('.product_cart_wrapper')
+let sum = 0
+const renderCartItem = (cartItem) => {
+    if(cartItem == null){
+        return
+    }else{
+        const items = cartItem
+        let sum = 0
+        items.forEach(i => {
+            
+            let item = document.createElement('div')
+            item.classList.add('product_on_cart')
+
+            let itemHTML = `
+            <div class="cart_product_image">
+                <img src="${i.image}" alt="">
+                <div class="remove_overlap">
+                    <span class="times">&times;</span>
+                </div>
+            </div>
+            <div class="cart_on_details">
+                <span>${i.title}</span>
+                <div><span class="itemNum">${i.itemNum}</span> x <span class="itemPrice">${i.price}</span></div>
+            </div>
+            `
+
+            var s = i.price;
+            while(s.charAt(0) === '$')
+            {
+                s = s.substring(1);
+            }
+            const product = i.itemNum * s
+            sum = sum + product
+
+            item.innerHTML = itemHTML
+
+            product_cart_wrapper.appendChild(item)
+            const cartitemclick = item.querySelector('.remove_overlap') 
+            cartitemclick.addEventListener('click', () => {
+                    const totalDiv = document.querySelector('.total')
+                    const parentDiv = cartitemclick.parentElement.parentElement
+                    const itemNum = parentDiv.querySelector('.itemNum').textContent
+                    const itemPrice = parentDiv.querySelector('.itemPrice').textContent
+                    var s = itemPrice;
+                    while(s.charAt(0) === '$')
+                    {
+                        s = s.substring(1);
+                    } 
+                    var sum = parseFloat(totalDiv.textContent)
+                    const product = parseFloat(s) * parseFloat(itemNum)
+                    sum = sum - product
+                    totalDiv.textContent = sum
+            })
+        });
+    }
+}
+
+const updateTotalWhenRemove = () => {
+          // update price
+        // const remove_overlap = document.querySelectorAll('.remove_overlap')
+        // remove_overlap.forEach(i => {
+        //     console.log(i)
+        //     i.addEventListener('click', () => {
+        //         const item_num = i.parentElement.parentElement.querySelector('.itemNum')
+        //         const item_price = i.parentElement.parentElement.querySelector('.itemPrice')
+        //         const total = document.querySelector('.total')
+        //         let totalInt = parseInt(total.textContent)
+        //         var s = item_price.textContent;
+        //         while(s.charAt(0) === '$')
+        //         {
+        //             s = s.substring(1);
+        //         }
+        //         const product = parseInt(item_num.textContent) * s
+        //         // const final = totalInt - product
+        //         // console.log(product)
+        //         // total.textContent = final
+        //     })
+        // })  
+}
+
+const renderTotalItem = (cached) => {
+    if(cached == null){
+        return
+    }else{
+        const items = cached
+        // let sum = 0
+        items.forEach(i => {
+            var s = i.price;
+            while(s.charAt(0) === '$')
+            {
+                s = s.substring(1);
+            }
+            const product = i.itemNum * s
+            sum = sum + product
+
+        });
+        const totalDiv = document.querySelector('.total')
+        totalDiv.textContent = sum
+
+        // remove cart item
+        const remove_overlap = document.querySelectorAll('.remove_overlap')
+        remove_overlap.forEach((click_span_ex,index) => {
+            click_span_ex.addEventListener('click', (e) => {
+                click_span_ex.parentElement.parentElement.remove()
+                let array = JSON.parse(sessionStorage.getItem('cart_items'));
+                array.splice(index,1)
+                sessionStorage.setItem('cart_items', JSON.stringify(array));
+            })
+        })
+    }
+}
+
+
+var cached = JSON.parse(window.sessionStorage.getItem('cart_items'));
+if(cached === null){
+    renderCartItem(null)    
+}else{
+    renderCartItem(cached)
+    renderTotalItem(cached)
+   
+}
+
+
 quickView.forEach(quickViewBtn => {
     quickViewBtn.addEventListener('click', (e) => {
         // target the card to get the card data
@@ -36,6 +158,7 @@ quickView.forEach(quickViewBtn => {
             </div>
         </div>
         <div class="modal_container">
+            <span class="remove">&times;</span>
             <div class="modal_img_l">
                 <img src="${imageSrc}" alt="myimg">
             </div>
@@ -45,7 +168,7 @@ quickView.forEach(quickViewBtn => {
                 <div class="details_wrapper">
                     <div class="choose size">
                         <span>Size</span>
-                        <select id="sizeIdCart" class="form-select form-select-md mb-3" >
+                        <select id="sizeIdCart" class="form-select form-select-md mb-3" required/>
                             <option selected>Open this select menu</option>
                             <option value="Size S">Size S</option>
                             <option value="Size M">Size M</option>
@@ -55,7 +178,7 @@ quickView.forEach(quickViewBtn => {
                     </div>
                     <div class="choose color">
                         <span>Color</span>
-                        <select id="colorIdCart" class="form-select form-select-md mb-3" >
+                        <select id="colorIdCart" class="form-select form-select-md mb-3" required/>
                             <option selected style="padding: 30px 0;">Open this select menu</option>
                             <option value="Black">Black</option>
                             <option value="White">White</option>
@@ -66,7 +189,7 @@ quickView.forEach(quickViewBtn => {
                 </div>
                 <div class="count">
                     <button class="subtract">-</button>
-                    <input id="inputNumberItem" type="text" maxlength="3"  value="0"/>
+                    <input id="inputNumberItem" type="text" maxlength="3"  value="1" required/>
                     <button class="add">+</button>
                 </div>
                 <div class="button_wrap">
@@ -106,8 +229,8 @@ quickView.forEach(quickViewBtn => {
         const subtractNumber = (e) => {
             e.preventDefault();
             let latestnum = inputitem.value
-            if(latestnum <= 0){
-                latestnum = 0
+            if(latestnum <= 1){
+                latestnum = 1
             }else{
                 latestnum--
                 inputitem.value = latestnum
@@ -126,6 +249,7 @@ quickView.forEach(quickViewBtn => {
             // clicking add to cart
         const add_to_cart_form = document.querySelector('#add_to_cart_form')
         add_to_cart_form.addEventListener('submit', (e) => {
+            add_to_cart_form.disabled = true;
             e.preventDefault();
             const size = add_to_cart_form['sizeIdCart'].value
             const color = add_to_cart_form['colorIdCart'].value
@@ -139,27 +263,28 @@ quickView.forEach(quickViewBtn => {
                 itemNum:inputitem.value
             }
 
-
+            let bag;
             let cachedew = sessionStorage.getItem('cart_items');
+            objHandler.push(alldatacombine)            
             
-            // objHandler.push(alldatacombine) 
+            // add item to sidebar ps not session storage
+            renderCartItem(objHandler)
+            renderTotalItem(objHandler)
+            // adding item to session storage 
             if(cachedew === null){
                 bag = []
             }else{
                 bag = JSON.parse(cachedew)
             }
             bag.push(alldatacombine)
-            // bag.push(objHandler)
-            // db.collection('Reservation').add(
-            //     cached
-            //  )
 
-            
             sessionStorage.setItem('cart_items', JSON.stringify(bag));
-            
+        
+
             // modal notification
             const modal_notif_container = document.querySelector('.modal_notif')
             modal_notif_container.classList.add('active_notif')
+
             // check_animation.classList.add('check-container')
             const ok_btn_notif = document.querySelector('#ok_btn_notif')
             modal_notif_container.addEventListener('transitionend', () => {
@@ -173,13 +298,13 @@ quickView.forEach(quickViewBtn => {
                 modal_notif_container.addEventListener('transitionend', () => {
                     modal_notif_container.classList.remove('notif_remove_transition')     
                     modal_notif_container.classList.remove('active_notif')     
+                    add_to_cart_form.disabled = false;
                 })
-                location.reload();
+                // location.reload();
             })
             
         })
-
-
+        //
         // remove_modal
         const item_modal = document.querySelector('.item_modal')
         item_modal.addEventListener('click', (e) => {
@@ -192,11 +317,19 @@ quickView.forEach(quickViewBtn => {
             }
 
         })
+        // remove modal
+        const removebtn= document.querySelector('.remove')
+        // const item_modal = document.querySelector('.item_modal')
+        removebtn.addEventListener('click', (e) => {
+            item_modal.classList.add('transition')
+            item_modal.addEventListener('transitionend', function() {
+                item_modal.remove()
+            })
+        })
+
     })
-
-
-
 })
+
 
 
 
