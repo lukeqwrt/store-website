@@ -3,6 +3,7 @@ const quickView = document.querySelectorAll('.so_view')
 const main = document.querySelector('.main')
 const product_cart_wrapper = document.querySelector('.product_cart_wrapper')
 let sum = 0
+let cartCount = 0
 const renderCartItem = (cartItem) => {
     if(cartItem == null){
         return
@@ -58,29 +59,10 @@ const renderCartItem = (cartItem) => {
     }
 }
 
-const updateTotalWhenRemove = () => {
-          // update price
-        // const remove_overlap = document.querySelectorAll('.remove_overlap')
-        // remove_overlap.forEach(i => {
-        //     console.log(i)
-        //     i.addEventListener('click', () => {
-        //         const item_num = i.parentElement.parentElement.querySelector('.itemNum')
-        //         const item_price = i.parentElement.parentElement.querySelector('.itemPrice')
-        //         const total = document.querySelector('.total')
-        //         let totalInt = parseInt(total.textContent)
-        //         var s = item_price.textContent;
-        //         while(s.charAt(0) === '$')
-        //         {
-        //             s = s.substring(1);
-        //         }
-        //         const product = parseInt(item_num.textContent) * s
-        //         // const final = totalInt - product
-        //         // console.log(product)
-        //         // total.textContent = final
-        //     })
-        // })  
+const renderCartCount = (count) => {
+    const cartDiv = document.querySelector('.cartCount')
+    cartDiv.textContent = count
 }
-
 const renderTotalItem = (cached) => {
     if(cached == null){
         return
@@ -112,7 +94,12 @@ const renderTotalItem = (cached) => {
         })
     }
 }
-
+const renderCartCountCached = (count) => {
+    count.forEach((i,index) => {
+        const cartDiv = document.querySelector('.cartCount')
+        cartDiv.textContent = index + 1
+    })
+}
 
 var cached = JSON.parse(window.sessionStorage.getItem('cart_items'));
 if(cached === null){
@@ -120,7 +107,7 @@ if(cached === null){
 }else{
     renderCartItem(cached)
     renderTotalItem(cached)
-   
+    renderCartCountCached(cached)
 }
 
 
@@ -267,7 +254,10 @@ quickView.forEach(quickViewBtn => {
             let cachedew = sessionStorage.getItem('cart_items');
             objHandler.push(alldatacombine)            
             
+            let countNum = document.querySelector('.cartCount').textContent
+            countNum++
             // add item to sidebar ps not session storage
+            renderCartCount(countNum)
             renderCartItem(objHandler)
             renderTotalItem(objHandler)
             // adding item to session storage 

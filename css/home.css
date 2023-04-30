@@ -105,8 +105,10 @@ html{
     padding: 0 35px;
     display: flex;
     place-items: center;
-     border-left: 1px solid rgba(255, 255, 255, 0.103);
+    border-left: 1px solid rgba(255, 255, 255, 0.103);
+    position: relative;
 }
+
 .main .nav_container .nav_wrapper .cart i{
     font-size: 22px;
     color: #fff;
@@ -115,6 +117,18 @@ html{
 }
 .main .nav_container .nav_wrapper .cart i:hover{
     color: #545DA5;
+}
+.main .nav_container .nav_wrapper .cart i .cartCount{
+    font-family: 'Poppins', sans-serif;
+    background: #717fe0;
+    color: #fff;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    padding:2px  6px;
+    position: absolute;
+    top: 18%;
+    left: 54%;
 }
 .main .nav_container .nav_wrapper .burger_bar{
     height: 100%;

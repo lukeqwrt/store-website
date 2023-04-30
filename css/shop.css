@@ -131,3 +131,18 @@
     color: rgb(197, 197, 197);
     font-size: 20px;
 }
+
+#burger_trigger{
+    cursor: pointer;
+}
+#burger_trigger.active .bar:nth-child(2){
+    opacity: 0;
+}
+
+#burger_trigger.active .bar:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+}
+
+#burger_trigger.active .bar:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+}
