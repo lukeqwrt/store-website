@@ -3,6 +3,7 @@ const quickView = document.querySelectorAll('.so_view')
 const main = document.querySelector('.main')
 const product_cart_wrapper = document.querySelector('.product_cart_wrapper')
 let sum = 0
+
 let cartCount = 0
 const renderCartItem = (cartItem) => {
     if(cartItem == null){
@@ -41,6 +42,12 @@ const renderCartItem = (cartItem) => {
             product_cart_wrapper.appendChild(item)
             const cartitemclick = item.querySelector('.remove_overlap') 
             cartitemclick.addEventListener('click', () => {
+                let cartDiv = document.querySelector('.cartCount')
+                let parsecart = parseInt(cartDiv.textContent)
+                
+             
+                cartDiv.textContent = parsecart - 1
+                
                     const totalDiv = document.querySelector('.total')
                     const parentDiv = cartitemclick.parentElement.parentElement
                     const itemNum = parentDiv.querySelector('.itemNum').textContent
@@ -54,6 +61,8 @@ const renderCartItem = (cartItem) => {
                     const product = parseFloat(s) * parseFloat(itemNum)
                     sum = sum - product
                     totalDiv.textContent = sum
+
+                  
             })
         });
     }
@@ -87,6 +96,7 @@ const renderTotalItem = (cached) => {
         remove_overlap.forEach((click_span_ex,index) => {
             click_span_ex.addEventListener('click', (e) => {
                 click_span_ex.parentElement.parentElement.remove()
+            
                 let array = JSON.parse(sessionStorage.getItem('cart_items'));
                 array.splice(index,1)
                 sessionStorage.setItem('cart_items', JSON.stringify(array));
